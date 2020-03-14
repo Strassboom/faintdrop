@@ -1,5 +1,5 @@
 #!/bin/bash
-LIVE=overwatch
+LIVE=kiibo
 host=$(hostname)
 repoListFile="repos.txt"
 repoLogFile="repologs.txt"

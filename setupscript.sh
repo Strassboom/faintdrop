@@ -20,10 +20,10 @@ else
 	readarray -t okay < "repos.txt"
 	echo "${okay[@]}"
 	#echo "${repoArray[@]}"
-	for i in "${repoArray[@]}"
+	for i in "${okay[@]}"
 	do
 		echo -n $i: >> silly.txt
-		git -C $i/ pull >> silly.txt || echo "" >> silly.txt
+		git -C $i/ pull >> silly.txt || sudo git clone http://www.github.com/$i.git  >> silly.txt || sudo apt-get install git -y; git -C $i/ pull >> silly.txt || sudo git clone http://www.github.com/$i.git
 		tail -1 silly.txt
 	done
 fi

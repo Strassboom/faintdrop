@@ -1,5 +1,5 @@
 #!/bin/bash
-LIVE=miguel
+LIVE=leopold
 host=$(hostname)
 pkgCheckFile="packageCheck.txt"
 repoListFile="repos.txt"
@@ -14,12 +14,12 @@ then
 	touch "$pkgCheckFile"
 	echo -n "" > "$repoListFile"
 	echo -n "" >  "$repoLogFile"
+	sudo reboot -h now
+else
 	sudo apt-get --yes update
 	sudo apt-get install git -y
 	sudo apt-get install nodejs -y
 	sudo apt-get install lynx -y
-	sudo reboot -h now
-else
 	echo "This server was initialized"
 	declare -a okay;
 	readarray -t okay < "$repoListFile"

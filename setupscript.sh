@@ -1,22 +1,24 @@
 #!/bin/bash
-LIVE=kiibo
+LIVE=miguel
 host=$(hostname)
+pkgCheckFile="packageCheck.txt"
 repoListFile="repos.txt"
 repoLogFile="repologs.txt"
 if [ $host != $LIVE ]
 then
         echo $'This server is not initialized\nRunning initial setup\nExpect one restart'
 	sudo echo "$LIVE" > "/etc/hostname"
-	sudo printf "127.0.0.1\t\t$LIVE" >> "/etc/hosts"
+	sudo echo -e "127.0.0.1\t\t$LIVE" >> "/etc/hosts"
 	sudo sh -c "wpa_passphrase Bogli Disney19 >> /etc/wpa_supplicant/wpa_supplicant.conf"
 	sudo sh -c "wpa_passphrase SamBox passtheboof >> /etc/wpa_supplicant/wpa_supplicant.conf"
-	touch "$repoListFile"
-	touch "$repoLogFile"
-	sudo reboot -h now
+	touch "$pkgCheckFile"
+	echo -n "" > "$repoListFile"
+	echo -n "" >  "$repoLogFile"
 	sudo apt-get --yes update
-	yes | sudo apt-get install git
-	sudo apt-get --yes install nodejs
-	sudo apt-get --yes install lynx
+	sudo apt-get install git -y
+	sudo apt-get install nodejs -y
+	sudo apt-get install lynx -y
+	sudo reboot -h now
 else
 	echo "This server was initialized"
 	declare -a okay;
